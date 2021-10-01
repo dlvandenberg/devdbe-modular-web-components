@@ -1,7 +1,9 @@
-import { NgModule } from '@angular/core';
+import { Injector, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
+
+import { createCustomElement } from '@angular/elements';
 
 import { 
   DoubledModule,
@@ -29,6 +31,13 @@ import {
       provide: HALVE_PATH, useFactory: () => window['__env'].halvePath
     }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: []
 })
-export class AppModule { }
+export class AppModule {
+  constructor(private readonly injector: Injector) {}
+
+  ngDoBootstrap() {
+    const countWriteElement = createCustomElement(AppComponent, { injector: this.injector });
+    customElements.define('count-write', countWriteElement);
+  }
+}

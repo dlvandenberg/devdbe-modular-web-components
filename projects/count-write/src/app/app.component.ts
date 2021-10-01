@@ -1,14 +1,25 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   template: `
     <div class="count-write">
       <h2>Counter - write</h2>
-      <button (click)="startInterval()" [disabled]="interval">Start</button> | <button (click)="stopInterval()" [disabled]="!interval"></button>
+      <button (click)="startInterval()" [disabled]="interval">Start</button> | <button (click)="stopInterval()" [disabled]="!interval">Stop</button>
+      <hr>
+      <div class="cont">
+        <lib-halve [value]="value"></lib-halve>
+      </div>
+      <div class="cont">
+        <lib-double [value]="value"></lib-double>
+      </div>
     </div>
   `,
-  styles: []
+  styles: [
+    '.count-write { padding: 1em; background-color: #343434; color: #fff; border: 2px solid #d4d4d4; }',
+    '.cont { padding: 1em; margin: 1em; background-color: #333; color: #fff; border: 2px solid #aeaeae; }'
+  ],
+  encapsulation: ViewEncapsulation.None
 })
 export class AppComponent {
   public value = 0;

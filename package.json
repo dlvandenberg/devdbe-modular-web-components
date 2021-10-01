@@ -4,9 +4,12 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build modular-app",
     "build:libs": "ng build --configuration production halved && ng build --configuration production doubled",
     "postbuild:libs": "npm run package:halved && npm run package:doubled",
+    "build:count-write": "ng build count-write --configuration production --output-hashing=none",
+    "postbuild:count-write": "cat dist/count-write/*.js | gzip > dist/count-write/count-write.js.gz",
+    "serve:count-write": "http-server dist/count-write --gzip",
     "package:halved": "cd dist/halved && npm pack",
     "package:doubled": "cd dist/doubled && npm pack",
     "install:libs": "npm run install:halved && npm run install:doubled",
@@ -31,7 +34,7 @@
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~12.2.7",
+    "@angular-devkit/build-angular": "~12.2.8",
     "@angular/cli": "~12.2.7",
     "@angular/compiler-cli": "~12.2.8",
     "@types/node": "^12.11.1",
