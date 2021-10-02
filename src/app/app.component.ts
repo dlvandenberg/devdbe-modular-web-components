@@ -14,7 +14,7 @@ import { Component } from '@angular/core';
     </div>    
   `,
   styles: [
-    '.modular-container { padding: 1em; border: 1px dashed #000; }'
+    '.modular-container { padding: 1em; border: 1px dashed #000; background-color: #c3c3c3; }'
   ]
 })
 export class AppComponent {
