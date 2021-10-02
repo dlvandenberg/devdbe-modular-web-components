@@ -10,6 +10,7 @@
     "build:count-write": "ng build count-write --configuration production --output-hashing=none",
     "postbuild:count-write": "cat dist/count-write/*.js | gzip > dist/count-write/count-write.js.gz",
     "serve:count-write": "http-server dist/count-write --gzip",
+    "serve:count-read": "http-server projects/count-read",
     "package:halved": "cd dist/halved && npm pack",
     "package:doubled": "cd dist/doubled && npm pack",
     "install:libs": "npm run install:halved && npm run install:doubled",

@@ -8,9 +8,9 @@ import { Component } from '@angular/core';
       <h2>Web component 1:</h2>
       <hr>
       <count-write></count-write>
-      <br/>
+      <hr>
       <h2>Web component 2:</h2>
-      <p>TODO</p>
+      <count-read></count-read>
     </div>    
   `,
   styles: [
