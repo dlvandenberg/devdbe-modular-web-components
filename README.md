@@ -1,27 +1,80 @@
-# ModularApp
+# Modular Application with Web Components
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.1.0.
+This is an example project to try out a modular setup where an application (Angular) is composed of several 'Modules' (Web Components) which are loaded via remote URLs.
 
-## Development server
+# Quickstart
+1. Clone this repository
+2. Build the lib packages:
+```bash
+$ npm run build:libs
+```
+3. Install the packages (libs should get installed as well):
+```bash
+npm install
+```
+4. Build the web components:
+```bash
+npm run build:count-write && npm run build:count-read
+```
+5. Serve the web components using the http-server (using separate terminals):
+```bash
+npm run serve:count-write
+npm run serve:count-read
+```
+6. Serve the main application and open `http://localhost:4200/`:
+```bash
+ng serve modular-app
+```
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+The application should now load the two web components. Press the `start` button to start the interval, increasing the value every 5 seconds.
 
-## Code scaffolding
+# Modular-app
+This is the main application which loads in the others. The source code is located in `src/`. It is built with Angular `12.2.8`. In the root HTML file, `index.html`, a couple of scripts are loaded. Two scripts load in the Web Component via an external URL. Another script loads in environmental configuration, to enable setting a base-path for a HTTPService used in a web component.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Env.js
+This script, located in `src/assets/config/env.js`, sets some properties on the `window.__env` object, which can be read anywhere in the application, or in any web component. It is used to set the base paths for the HTTPServices used in a web component. 
 
-## Build
+When deploying this application on a Kubernetes cluster for example (or any server), you can modify the contents of `assets/config/env.js` to set the URLs with the deployment URLs of the backends.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+# Count-write
+This is a Web Component, built with `@angular/core@12.2.8`, and is a simple Angular Application, which is compiled to a Web Component using `@angular/elements`. The source code is located in `projects/count-write/`.
 
-## Running unit tests
+This application basically increases a value with a set interval and uses two (local) libraries, `@devdbe/halved` and `@devdbe/doubled` to calculate the halved and doubled values of that value. The value is also published via the browser window using a `CustomEvent`.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+In `AppModule`, the values for the InjectionTokens (used in the libraries described below) are provided by reading the `window.__env` object for the paths. Also, the `ngDoBootstrap()` method will create a Custom Element (Web Component) from the `AppComponent`.
 
-## Running end-to-end tests
+## @devdbe/halved
+This Angular library can be found in `projects/halved` and exports a Component which shows the halved value of a given value, using the `HalveService` to simulate a call to a backend. The `HalveService` uses the `HALVE_PATH` InjectionToken to set the path to the (simulated) http backend.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## @devdbe/doubled
+This Angular library can be found in `projects/doubled` and exports a Component which shows the doubled value of a given value, using the `DoubleService` to simulate a call to a backend. The `DoubleService` uses the `DOUBLE_PATH` InjectionToken to set the path to the (simulated) http backend.
 
-## Further help
+# Count-read
+This is a minimal implementation of a Web Component, using vanilla JavaScript. It listens to `CustomEvent`s on the `window` object for new values (emitted by the `count-write` Web Component) and displays it on screen.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+# State sharing
+The Web Components share state by using the `CustomEvents` to notify interested components of new values of an object or property. These events are sent via the `window` object and have the following signature:
+```js
+CustomEvent<T> {
+    detail: T,
+    type: string,
+    bubbles: boolean,
+    cancelable: boolean
+    ...
+}
+```
+In the `detail` property we can put any object to share. The event is sent with the following code:
+```js
+    window.dispatchEvent(new CustomEvent('value-update', {
+        detail: {
+            value: this.value
+        }
+    }));
+```
+And listened to with the following code:
+```js
+    window.addEventListener('value-update', (e) => {
+        this.value = e.detail.value;
+        this.shadowRoot.querySelector('#valueField').textContent = this.value;
+    });
+```
