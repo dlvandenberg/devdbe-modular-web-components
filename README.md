@@ -42,6 +42,12 @@ This is a Web Component, built with `@angular/core@12.2.8`, and is a simple Angu
 This application basically increases a value with a set interval and uses two (local) libraries, `@devdbe/halved` and `@devdbe/doubled` to calculate the halved and doubled values of that value. The value is also published via the browser window using a `CustomEvent`.
 
 In `AppModule`, the values for the InjectionTokens (used in the libraries described below) are provided by reading the `window.__env` object for the paths. Also, the `ngDoBootstrap()` method will create a Custom Element (Web Component) from the `AppComponent`.
+```ts
+ngDoBootstrap() {
+    const countWriteElement = createCustomElement(AppComponent, { injector: this.injector });
+    customElements.define('count-write', countWriteElement);
+  }
+```
 
 ## @devdbe/halved
 This Angular library can be found in `projects/halved` and exports a Component which shows the halved value of a given value, using the `HalveService` to simulate a call to a backend. The `HalveService` uses the `HALVE_PATH` InjectionToken to set the path to the (simulated) http backend.

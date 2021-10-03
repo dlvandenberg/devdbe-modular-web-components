@@ -11,7 +11,7 @@
     "postbuild:count-write": "cat dist/count-write/*.js | gzip > dist/count-write/count-write.js.gz",
     "build:count-read": "mkdir -p dist/count-read && cat projects/count-read/*.js | gzip > dist/count-read/count-read.js.gz",
     "serve:count-write": "http-server dist/count-write --gzip -p 8080",
-    "serve:count-read": "http-server dist/count-read --gzip -p 80801",
+    "serve:count-read": "http-server dist/count-read --gzip -p 8081",
     "package:halved": "cd dist/halved && npm pack",
     "package:doubled": "cd dist/doubled && npm pack",
     "install:libs": "npm run install:halved && npm run install:doubled",
@@ -39,7 +39,9 @@
     "@angular-devkit/build-angular": "~12.2.8",
     "@angular/cli": "~12.2.7",
     "@angular/compiler-cli": "~12.2.8",
+    "@angular/elements": "^12.2.8",
     "@types/node": "^12.11.1",
+    "http-server": "^13.0.2",
     "ng-packagr": "^12.1.0",
     "typescript": "~4.3.2"
   }
