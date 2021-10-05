@@ -19,7 +19,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
     '.count-write { padding: 1em; background-color: #343434; color: #fff; border: 2px solid #d4d4d4; }',
     '.cont { padding: 1em; margin: 1em; background-color: #333; color: #fff; border: 2px solid #aeaeae; }'
   ],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.ShadowDom
 })
 export class AppComponent {
   public value = 0;

@@ -12,7 +12,7 @@ import { HalveService } from './halve.service';
     </div>
   `,
   styleUrls: [ './halve.component.scss' ],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.ShadowDom
 })
 export class HalveComponent {
   @Input()

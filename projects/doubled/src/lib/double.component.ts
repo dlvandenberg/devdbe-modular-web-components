@@ -14,7 +14,7 @@ import { DoubleService } from './double.service';
   styleUrls: [
     './double.component.scss'
   ],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.ShadowDom
 })
 export class DoubleComponent {
   @Input()
