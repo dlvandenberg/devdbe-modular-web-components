@@ -9,16 +9,19 @@ This is an example project to try out a modular setup where an application is co
 cd web-components/wc1 && npm i && npm run build && npm run serve
 ```
 It is now served at `http://localhost:4210`
+
 3. Install and start Web Component 2
 ```bash
 cd web-components/wc2 && npm i && npm run build && ng serve
 ```
 It is now served at `http://localhost:4220`
+
 4. Install and start Web Component 3
 ```bash
 cd web-components/wc3 && npm i && npm run build && npm run serve
 ```
 It is now served at `http://localhost:4230`
+
 5. Install and start the Shell
 ```bash
 cd react-shell && npm i && npm run build && npm run serve
