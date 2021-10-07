@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { delay, Observable, of, tap } from 'rxjs';
 import { DOUBLE_PATH } from './double-path.token';
 
 @Injectable({
@@ -14,8 +14,9 @@ export class DoubleService {
   }
 
   public getDoubled(value: number): Observable<number> {
-    // Simulate call to a backend server
-    console.log(`GET request to: ${this.path}/doubled/${value}`);
-    return of(value*2);
+    return of(value * 2).pipe(
+        tap(_ => console.log(`GET request to: ${this.path}/doubled/${value}`)),
+        delay(500) // simulate network load 
+      );
   }
 }

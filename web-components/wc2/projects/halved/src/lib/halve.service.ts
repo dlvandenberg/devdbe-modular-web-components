@@ -1,11 +1,12 @@
 import { Inject, Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { delay, Observable, of, tap } from 'rxjs';
 import { HALVE_PATH } from './halve-path.token';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HalveService {
+
   private path = '';
 
   constructor(@Inject(HALVE_PATH) halvePath: string) {
@@ -13,8 +14,9 @@ export class HalveService {
   }
 
   public getHalved(value: number): Observable<number> {
-    // Simulate call to a backend
-    console.log(`GET request to: ${this.path}/halved/${value}`);
-    return of(value/2);
+    return of(value / 2).pipe(
+        tap(_ => console.log(`GET request to: ${this.path}/halved/${value}`)),
+        delay(500) // simulate network load
+      );
   }
 }
