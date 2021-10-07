@@ -1,5 +1,5 @@
 (function(window) {
-    window.__env = window.__env | {};
+    window.__env = window.__env || {};
     window.__env.contextPath = window.__env.contextPath || '/';
 
     window.__env.halvedPath = 'http://localhost:8080/halved-backend';
