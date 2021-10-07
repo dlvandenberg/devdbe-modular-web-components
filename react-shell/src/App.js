@@ -10,6 +10,8 @@ const App = () => (
         <counter-writer/>
         <hr/>
         <counter-reader/>
+        <hr/>
+        <wc-reader/>
     </div>
 );
 
