@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>React Shell</title>
+        <script src="./assets/config/env.js"></script>
+        <script>
+            // Rewrite base dir
+            document.write("<base href='" + window.__env.contextPath + "' />");
+        </script>
+
+        <!-- Load custom element without MF -->
+        <script src="http://localhost:4230/custom-element.js"></script>
+    </head>
+    <body>
+        <div id="root"></div>
+    </body>
+</html>

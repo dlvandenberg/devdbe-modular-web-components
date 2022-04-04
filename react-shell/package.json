@@ -1,0 +1,37 @@
+{
+  "name": "react-shell",
+  "version": "0.1.0",
+  "description": "React appliciation which is a shell, loading modules remotely",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack",
+    "build:production": "webpack --mode production",
+    "serve": "serve dist -p 4201"
+  },
+  "keywords": [
+    "react",
+    "shell",
+    "modules",
+    "module",
+    "federation"
+  ],
+  "author": "Dennis van den Berg",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.15.8",
+    "@babel/preset-react": "^7.14.5",
+    "babel-loader": "^8.2.2",
+    "bundle-loader": "^0.5.6",
+    "copy-webpack-plugin": "^9.0.1",
+    "html-webpack-plugin": "^5.3.2",
+    "serve": "^12.0.1",
+    "webpack": "^5.57.1",
+    "webpack-cli": "^4.9.0",
+    "webpack-dev-server": "^4.3.1"
+  },
+  "dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "zone.js": "^0.11.4"
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "name": "angular-writer",
+  "version": "0.1.0",
+  "description": "Angular Application built with Elements which contains a counter which values are doubled and halved by libs, and the value is emitted via CustomEvents",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
+    "build:libs": "ng build --configuration production halved && ng build --configuration production doubled",
+    "postbuild:libs": "npm run package:halved && npm run package:doubled",
+    "package:halved": "cd dist/halved && npm pack",
+    "package:doubled": "cd dist/doubled && npm pack",
+    "preinstall": "npm run build:libs",
+    "install:libs": "npm run install:halved && npm run install:doubled",
+    "install:halved": "npm i dist/halved/devdbe-halved-*.tgz",
+    "install:doubled": "npm i dist/doubled/devdbe-doubled-*.tgz",
+    "watch": "ng build --watch --configuration development"
+  },
+  "keywords": [
+    "typescript",
+    "angular",
+    "elements",
+    "webcomponent"
+  ],
+  "private": true,
+  "author": "Dennis van den Berg",
+  "license": "MIT",
+  "dependencies": {
+    "@angular/animations": "~12.2.8",
+    "@angular/common": "~12.2.8",
+    "@angular/compiler": "~12.2.8",
+    "@angular/core": "~12.2.8",
+    "@angular/forms": "~12.2.8",
+    "@angular/platform-browser": "~12.2.8",
+    "@angular/platform-browser-dynamic": "~12.2.8",
+    "@angular/router": "~12.2.8",
+    "@devdbe/doubled": "file:dist/doubled/devdbe-doubled-0.0.1.tgz",
+    "@devdbe/halved": "file:dist/halved/devdbe-halved-0.0.1.tgz",
+    "rxjs": "^7.4.0",
+    "tslib": "^2.2.0",
+    "zone.js": "~0.11.4"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "~12.2.8",
+    "@angular/cli": "~12.2.7",
+    "@angular/compiler-cli": "~12.2.8",
+    "@angular/elements": "^12.2.8",
+    "@types/node": "^12.11.1",
+    "ng-packagr": "^12.1.0",
+    "ngx-build-plus": "^12.2.0",
+    "typescript": "~4.3.2"
+  }
+}
